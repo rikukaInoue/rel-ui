@@ -2,18 +2,9 @@ import { definePreset } from "@pandacss/dev";
 import { colors } from "./colors";
 import { spacing } from "./spacing";
 import { fonts, fontSizes, fontWeights, lineHeights, radii } from "./typography";
+import { semanticColors } from "./semantic";
+import { componentTokens } from "./component-tokens";
 
-/**
- * Panda CSS Preset — rel-ui design tokens.
- *
- * Usage in panda.config.ts:
- * ```ts
- * import { relUiPreset } from "@rel-ui/tokens/panda-preset";
- * export default defineConfig({
- *   presets: ["@pandacss/preset-base", relUiPreset],
- * });
- * ```
- */
 export const relUiPreset = definePreset({
   name: "rel-ui",
   theme: {
@@ -26,6 +17,12 @@ export const relUiPreset = definePreset({
         fontWeights,
         lineHeights,
         radii,
+      },
+      semanticTokens: {
+        colors: {
+          ...semanticColors,
+          ...componentTokens,
+        },
       },
     },
   },
