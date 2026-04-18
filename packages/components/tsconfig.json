@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "#styled-system/*": ["./src/styled-system/*"]
+    }
+  },
+  "include": ["src"]
+}

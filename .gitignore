@@ -1,0 +1,9 @@
+node_modules/
+dist/
+styled-system/
+*.tsbuildinfo
+.DS_Store
+
+# VRT snapshots are committed, but diffs are not
+test-results/
+playwright-report/

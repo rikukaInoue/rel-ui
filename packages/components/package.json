@@ -1,0 +1,33 @@
+{
+  "name": "@rel-ui/components",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "panda codegen && tsup",
+    "dev": "tsup --watch",
+    "lint": "tsc --noEmit",
+    "prepare": "panda codegen"
+  },
+  "dependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.52.0",
+    "@rel-ui/tokens": "workspace:*",
+    "@types/react": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "~5.8.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@rel-ui/tokens",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./panda-preset": {
+      "import": "./dist/panda-preset.js",
+      "types": "./dist/panda-preset.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "sync": "tsx src/sync-figma.ts",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.52.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "~5.8.0"
+  }
+}

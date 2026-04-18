@@ -1,0 +1,17 @@
+{
+  "name": "rel-ui",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @rel-ui/docs dev",
+    "test": "pnpm -r test",
+    "test:vrt": "pnpm --filter @rel-ui/docs test:vrt",
+    "test:vrt:update": "pnpm --filter @rel-ui/docs test:vrt:update",
+    "lint": "pnpm -r lint",
+    "tokens:sync": "pnpm --filter @rel-ui/tokens sync",
+    "prepare": "pnpm -r prepare"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
