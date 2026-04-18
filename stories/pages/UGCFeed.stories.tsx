@@ -1,103 +1,88 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Container, Stack, HStack, Card, Avatar, Badge, Button, Tabs, TabList, Tab, TabPanel, Pagination, EmptyState, TextArea, Divider, Alert } from "@rel-ui/components";
+import {
+  Page, Container, Section, Stack, HStack,
+  Heading, Text, Button, Badge,
+  Tabs, TabList, Tab, TabPanel,
+  Pagination, EmptyState,
+  PostCard,
+} from "@rel-ui/components";
 
-const FeedPage = () => {
-  return (
-    <div style={{ background: "#fafafa", minHeight: "100vh", paddingTop: 32, paddingBottom: 32 }}>
-      <Container size="md">
-        <Stack gap={6}>
-          {/* Header */}
-          <HStack justify="between">
-            <h1 style={{ fontSize: 24, fontWeight: "bold" }}>フィード</h1>
-            <Button variant="primary">新規投稿</Button>
-          </HStack>
+const FeedPage = () => (
+  <Page bg="muted">
+    <Container size="md">
+      <Section>
+        <HStack justify="between">
+          <Heading level={1}>フィード</Heading>
+          <Button variant="primary">新規投稿</Button>
+        </HStack>
+      </Section>
 
-          {/* Tabs */}
-          <Tabs>
-            <TabList aria-label="Feed tabs">
-              <Tab id="latest">新着</Tab>
-              <Tab id="popular">人気</Tab>
-              <Tab id="following">フォロー中</Tab>
-            </TabList>
-            <TabPanel id="latest">
-              <Stack gap={4}>
-                {/* Post Card */}
-                <Card variant="default" padding="md">
-                  <Stack gap={4}>
-                    <HStack gap={3} justify="between">
-                      <HStack gap={3}>
-                        <Avatar name="Taishi I" size="md" />
-                        <Stack gap={1}>
-                          <span style={{ fontWeight: 600, fontSize: 14 }}>Taishi I</span>
-                          <span style={{ color: "#737373", fontSize: 12 }}>2時間前</span>
-                        </Stack>
-                      </HStack>
-                      <Badge variant="info">テック</Badge>
-                    </HStack>
-                    <div>
-                      <h3 style={{ fontWeight: 600, fontSize: 16, marginBottom: 8 }}>React Aria でアクセシブルなコンポーネントを作る</h3>
-                      <p style={{ color: "#525252", fontSize: 14, lineHeight: 1.6 }}>
-                        React Aria Components を使ったデザインシステムの構築方法について。
-                        キーボード操作、フォーカス管理、ARIA 属性が自動で付与されるので...
-                      </p>
-                    </div>
-                    <HStack gap={4}>
-                      <span style={{ fontSize: 13, color: "#737373" }}>❤️ 42</span>
-                      <span style={{ fontSize: 13, color: "#737373" }}>💬 12</span>
-                      <span style={{ fontSize: 13, color: "#737373" }}>🔖 保存</span>
-                    </HStack>
-                  </Stack>
-                </Card>
+      <Section>
+        <Tabs>
+          <TabList aria-label="Feed tabs">
+            <Tab id="latest">新着</Tab>
+            <Tab id="popular">人気</Tab>
+            <Tab id="following">フォロー中</Tab>
+          </TabList>
 
-                {/* Post Card 2 */}
-                <Card variant="default" padding="md">
-                  <Stack gap={4}>
-                    <HStack gap={3} justify="between">
-                      <HStack gap={3}>
-                        <Avatar name="Alice T" size="md" />
-                        <Stack gap={1}>
-                          <span style={{ fontWeight: 600, fontSize: 14 }}>Alice T</span>
-                          <span style={{ color: "#737373", fontSize: 12 }}>5時間前</span>
-                        </Stack>
-                      </HStack>
-                      <Badge variant="success">デザイン</Badge>
-                    </HStack>
-                    <div>
-                      <h3 style={{ fontWeight: 600, fontSize: 16, marginBottom: 8 }}>Figma Variables とデザイントークンの同期</h3>
-                      <p style={{ color: "#525252", fontSize: 14, lineHeight: 1.6 }}>
-                        Figma MCP を使って Variables をコードのトークンに自動同期する仕組みを構築しました。
-                      </p>
-                    </div>
-                    <HStack gap={4}>
-                      <span style={{ fontSize: 13, color: "#737373" }}>❤️ 28</span>
-                      <span style={{ fontSize: 13, color: "#737373" }}>💬 7</span>
-                      <span style={{ fontSize: 13, color: "#737373" }}>🔖 保存</span>
-                    </HStack>
-                  </Stack>
-                </Card>
-
-                <Pagination current={1} total={10} onPageChange={() => {}} />
-              </Stack>
-            </TabPanel>
-            <TabPanel id="popular">
-              <EmptyState
-                title="人気の投稿はまだありません"
-                description="いいねが多い投稿がここに表示されます"
+          <TabPanel id="latest">
+            <Stack gap={4}>
+              <PostCard
+                user={{ name: "Taishi I" }}
+                timestamp="2時間前"
+                tags={[{ label: "テック", variant: "info" }]}
+                title="React Aria でアクセシブルなコンポーネントを作る"
+                body="React Aria Components を使ったデザインシステムの構築方法について。キーボード操作、フォーカス管理、ARIA 属性が自動で付与されるので..."
+                likes={42}
+                comments={12}
               />
-            </TabPanel>
-            <TabPanel id="following">
-              <EmptyState
-                title="フォロー中の投稿はありません"
-                description="ユーザーをフォローすると、その人の投稿がここに表示されます"
-                action={<Button variant="secondary">ユーザーを探す</Button>}
+
+              <PostCard
+                user={{ name: "Alice T" }}
+                timestamp="5時間前"
+                tags={[{ label: "デザイン", variant: "success" }]}
+                title="Figma Variables とデザイントークンの同期"
+                body="Figma MCP を使って Variables をコードのトークンに自動同期する仕組みを構築しました。"
+                likes={28}
+                comments={7}
               />
-            </TabPanel>
-          </Tabs>
-        </Stack>
-      </Container>
-    </div>
-  );
-};
+
+              <PostCard
+                user={{ name: "Bob K" }}
+                timestamp="1日前"
+                tags={[
+                  { label: "AWS", variant: "warning" },
+                  { label: "認証", variant: "default" },
+                ]}
+                title="Cognito を隠した OIDC Provider の設計"
+                body="マルチプロダクトで共通の認証基盤を作る際に、Cognito を Proxy IdP として隠蔽するパターンを解説します。"
+                likes={65}
+                comments={23}
+              />
+
+              <Pagination current={1} total={10} onPageChange={() => {}} />
+            </Stack>
+          </TabPanel>
+
+          <TabPanel id="popular">
+            <EmptyState
+              title="人気の投稿はまだありません"
+              description="いいねが多い投稿がここに表示されます"
+            />
+          </TabPanel>
+
+          <TabPanel id="following">
+            <EmptyState
+              title="フォロー中の投稿はありません"
+              description="ユーザーをフォローすると、その人の投稿がここに表示されます"
+              action={<Button variant="secondary">ユーザーを探す</Button>}
+            />
+          </TabPanel>
+        </Tabs>
+      </Section>
+    </Container>
+  </Page>
+);
 
 const meta = {
   title: "Pages/UGC Feed",
