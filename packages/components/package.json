@@ -14,8 +14,7 @@
   "scripts": {
     "build": "panda codegen && tsup",
     "dev": "tsup --watch",
-    "lint": "tsc --noEmit",
-    "prepare": "panda codegen"
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^19.0.0",
