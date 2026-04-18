@@ -29,13 +29,13 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - run: pnpm install --ignore-scripts
+      - run: pnpm install
 
       - name: Build tokens
         run: pnpm --filter @rel-ui/tokens build
 
-      - name: Generate styled-system
-        run: pnpm --filter @rel-ui/components panda codegen
+      - name: Build components
+        run: pnpm --filter @rel-ui/components build
 
       - name: Build Storybook
         run: pnpm build-storybook
