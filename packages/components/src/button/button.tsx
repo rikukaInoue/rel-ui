@@ -1,12 +1,13 @@
-import { type ButtonHTMLAttributes, forwardRef } from "react";
+import { Button as AriaButton, type ButtonProps as AriaButtonProps } from "react-aria-components";
 import { css, cx } from "#styled-system/css";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends AriaButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  className?: string;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
@@ -14,7 +15,7 @@ const variantStyles: Record<ButtonVariant, string> = {
     bg: "brand.600",
     color: "white",
     _hover: { bg: "brand.700" },
-    _active: { bg: "brand.800" },
+    _pressed: { bg: "brand.800" },
   }),
   secondary: css({
     bg: "neutral.100",
@@ -22,19 +23,19 @@ const variantStyles: Record<ButtonVariant, string> = {
     border: "1px solid",
     borderColor: "neutral.300",
     _hover: { bg: "neutral.200" },
-    _active: { bg: "neutral.300" },
+    _pressed: { bg: "neutral.300" },
   }),
   ghost: css({
     bg: "transparent",
     color: "neutral.700",
     _hover: { bg: "neutral.100" },
-    _active: { bg: "neutral.200" },
+    _pressed: { bg: "neutral.200" },
   }),
   danger: css({
     bg: "error.500",
     color: "white",
     _hover: { bg: "error.700" },
-    _active: { bg: "error.700" },
+    _pressed: { bg: "error.700" },
   }),
 };
 
@@ -65,25 +66,21 @@ const baseStyle = css({
 });
 
 /**
- * Button component.
+ * Button component built on React Aria.
+ * Provides accessible keyboard and focus management out of the box.
  *
  * @example
  * ```tsx
  * <Button variant="primary" size="md">Click me</Button>
- * <Button variant="secondary" size="sm">Cancel</Button>
- * <Button variant="danger" onClick={handleDelete}>Delete</Button>
+ * <Button variant="secondary" size="sm" onPress={() => {}}>Cancel</Button>
+ * <Button variant="danger" isDisabled>Delete</Button>
  * ```
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", size = "md", className, ...props }, ref) => {
-    return (
-      <button
-        ref={ref}
-        className={cx(baseStyle, variantStyles[variant], sizeStyles[size], className)}
-        {...props}
-      />
-    );
-  },
-);
-
-Button.displayName = "Button";
+export function Button({ variant = "primary", size = "md", className, ...props }: ButtonProps) {
+  return (
+    <AriaButton
+      className={cx(baseStyle, variantStyles[variant], sizeStyles[size], className)}
+      {...props}
+    />
+  );
+}

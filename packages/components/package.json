@@ -18,7 +18,8 @@
     "prepare": "panda codegen"
   },
   "dependencies": {
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "react-aria-components": "^1.17.0"
   },
   "devDependencies": {
     "@pandacss/dev": "^0.52.0",

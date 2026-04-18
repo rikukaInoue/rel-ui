@@ -7,3 +7,6 @@ styled-system/
 # VRT snapshots are committed, but diffs are not
 test-results/
 playwright-report/
+
+*storybook.log
+storybook-static

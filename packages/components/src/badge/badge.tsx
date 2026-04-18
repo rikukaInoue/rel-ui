@@ -1,4 +1,4 @@
-import { type HTMLAttributes, forwardRef } from "react";
+import { type HTMLAttributes } from "react";
 import { css, cx } from "#styled-system/css";
 
 export type BadgeVariant = "default" | "success" | "warning" | "error" | "info";
@@ -35,16 +35,8 @@ const baseStyle = css({
  * <Badge variant="error">Error</Badge>
  * ```
  */
-export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ variant = "default", className, ...props }, ref) => {
-    return (
-      <span
-        ref={ref}
-        className={cx(baseStyle, variantStyles[variant], className)}
-        {...props}
-      />
-    );
-  },
-);
-
-Badge.displayName = "Badge";
+export function Badge({ variant = "default", className, ...props }: BadgeProps) {
+  return (
+    <span className={cx(baseStyle, variantStyles[variant], className)} {...props} />
+  );
+}

@@ -1,11 +1,14 @@
-import { type InputHTMLAttributes, forwardRef } from "react";
+import { Input as AriaInput, TextField, Label, FieldError, type TextFieldProps } from "react-aria-components";
 import { css, cx } from "#styled-system/css";
 
 export type InputSize = "sm" | "md" | "lg";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends TextFieldProps {
   inputSize?: InputSize;
-  error?: boolean;
+  label?: string;
+  errorMessage?: string;
+  placeholder?: string;
+  className?: string;
 }
 
 const sizeStyles: Record<InputSize, string> = {
@@ -14,7 +17,7 @@ const sizeStyles: Record<InputSize, string> = {
   lg: css({ px: "4", py: "3", fontSize: "lg" }),
 };
 
-const baseStyle = css({
+const inputStyle = css({
   display: "block",
   width: "100%",
   borderRadius: "md",
@@ -37,7 +40,7 @@ const baseStyle = css({
   },
 });
 
-const errorStyle = css({
+const invalidInputStyle = css({
   borderColor: "error.500",
   _focus: {
     borderColor: "error.500",
@@ -45,25 +48,53 @@ const errorStyle = css({
   },
 });
 
+const labelStyle = css({
+  display: "block",
+  fontSize: "sm",
+  fontWeight: "medium",
+  color: "neutral.700",
+  mb: "1",
+});
+
+const errorStyle = css({
+  fontSize: "sm",
+  color: "error.500",
+  mt: "1",
+});
+
+const fieldStyle = css({
+  width: "100%",
+});
+
 /**
- * Input component.
+ * Input component built on React Aria TextField.
+ * Provides accessible labeling, validation, and error messaging.
  *
  * @example
  * ```tsx
- * <Input placeholder="Email" />
- * <Input inputSize="lg" error />
+ * <Input label="Email" placeholder="you@example.com" />
+ * <Input label="Password" type="password" isRequired />
+ * <Input label="Name" isInvalid errorMessage="Name is required" />
  * ```
  */
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputSize = "md", error = false, className, ...props }, ref) => {
-    return (
-      <input
-        ref={ref}
-        className={cx(baseStyle, sizeStyles[inputSize], error && errorStyle, className)}
-        {...props}
+export function Input({
+  inputSize = "md",
+  label,
+  errorMessage,
+  placeholder,
+  className,
+  ...props
+}: InputProps) {
+  return (
+    <TextField className={cx(fieldStyle, className)} {...props}>
+      {label && <Label className={labelStyle}>{label}</Label>}
+      <AriaInput
+        className={({ isInvalid }) =>
+          cx(inputStyle, sizeStyles[inputSize], isInvalid && invalidInputStyle)
+        }
+        placeholder={placeholder}
       />
-    );
-  },
-);
-
-Input.displayName = "Input";
+      {errorMessage && <FieldError className={errorStyle}>{errorMessage}</FieldError>}
+    </TextField>
+  );
+}
