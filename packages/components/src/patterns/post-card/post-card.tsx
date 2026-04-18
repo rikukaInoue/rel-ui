@@ -56,7 +56,7 @@ export function PostCard({
   className,
 }: PostCardProps) {
   return (
-    <Card variant="default" padding="md" className={className}>
+    <Card variant="default" padding="md" hoverable className={className}>
       <Stack gap={4}>
         <HStack justify="between">
           <UserHeader name={user.name} avatar={user.avatar} subtitle={timestamp} />
