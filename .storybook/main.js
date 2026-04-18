@@ -15,6 +15,9 @@ const config = {
       "@rel-ui/components": path.resolve(import.meta.dirname, "../packages/components/src/index.ts"),
       "#styled-system": path.resolve(import.meta.dirname, "../packages/components/src/styled-system"),
     };
+    if (process.env.STORYBOOK_BASE) {
+      config.base = process.env.STORYBOOK_BASE;
+    }
     return config;
   },
 };
